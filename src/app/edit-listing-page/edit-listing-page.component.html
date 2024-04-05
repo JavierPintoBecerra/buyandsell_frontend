@@ -1,0 +1,15 @@
+<div class="content-box" *ngIf="listing">
+
+    <h2>Edit listing</h2>
+    <app-listing-data-form 
+        buttonText="Save Changes"
+        [currentName]="listing.name"
+        [currentDescriptions]="listing.description"
+        [currentPrice]="listing.price"
+        (onSubmit)="onSubmit($event)"
+    ></app-listing-data-form>
+</div>
+
+<div class="content-box" *ngIf="!listing">
+    <h3>Loading...</h3>
+</div>
