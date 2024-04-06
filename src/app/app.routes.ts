@@ -5,6 +5,7 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
 import { EditListingPageComponent } from './edit-listing-page/edit-listing-page.component';
 import { MyListingPageComponent } from './my-listing-page/my-listing-page.component';
 import { NewListingPageComponent } from './new-listing-page/new-listing-page.component';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 export const routes: Routes = [
 
@@ -22,6 +23,7 @@ export const routes: Routes = [
     {
         path: 'listings/:id',   // :id selects a particular list from the web page
         component: ListingDetailPageComponent,
+        ...canActivate(()=>redirectUnauthorizedTo('/listings'))
     },
     {
         path: 'contact/:id',   // :id selects a particular list from the web page
@@ -34,6 +36,7 @@ export const routes: Routes = [
     {
         path: 'my-listings',   // :id selects a particular list from the web page
         component: MyListingPageComponent,
+        ...canActivate(()=>redirectUnauthorizedTo('/listings'))
     },
     {
         path: 'new-listing',   // :id selects a particular list from the web page

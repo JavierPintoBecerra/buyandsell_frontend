@@ -10,7 +10,8 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import {provideAuth} from '@angular/fire/auth'
 
+
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideHttpClient(), GoogleAuthProvider, 
-  /*importProvidersFrom(provideFirebaseApp(()=>initializeApp(environment.firebase)), provideAuth(()=>getAuth()))*/]
+  providers: [provideRouter(routes), provideHttpClient(), GoogleAuthProvider,
+  importProvidersFrom(provideFirebaseApp(()=>initializeApp(environment.firebase)), provideAuth(()=>getAuth()))]
 };
