@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NavVarComponent } from './nav-var/nav-var.component';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -19,6 +19,7 @@ export class AppComponent {
   title = 'buy_and_sell';
   email: string = '';
   password: string='';
+
   
   constructor( 
     public auth: Auth,
@@ -34,12 +35,24 @@ export class AppComponent {
     return signOut(this.auth); 
   }
 
+  loginWithGoogle(){
+    return signInWithPopup(this.auth, new GoogleAuthProvider());
+  }
+
   loginClicked(): void{
     this.login(this.email, this.password)
       .then(response=>{
         console.log(response, 'succes in LOGIN');
       })
       .catch(error=>console.log(error)); 
+  }
+
+  googleClicked(){
+    this.loginWithGoogle()
+      .then(response =>{
+        console.log(response, 'user logged with Google Account'); 
+      })
+      .catch(error => console.log(error))
   }
   logOutClicked():void{
     this.logOut()

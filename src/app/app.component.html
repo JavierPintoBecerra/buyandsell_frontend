@@ -5,30 +5,35 @@
         <div id="content-wrap">
             <router-outlet />
         </div>
-        <form (ngSubmit)="registerUser()">
-            <h3>You are not register yet, please do!</h3>
-            <div>
-                <label for="name">Email: </label>
-                <input id="email" name="email" type="text" [(ngModel)]="email">
-            </div>
-            <div>
-                <label for="description">Password: </label>
-                <input id="password" name="password" type="text" [(ngModel)]="password">
-            </div>
-            <button type="submit">Send</button>
-        </form>
-        <form (ngSubmit)="loginClicked()">
-            <h3>You are not logged in yet, please do!</h3>
-            <div>
-                <label for="name">Email: </label>
-                <input id="email" name="email" type="text" [(ngModel)]="email">
-            </div>
-            <div>
-                <label for="description">Password: </label>
-                <input id="password" name="password" type="text" [(ngModel)]="password">
-            </div>
-            <button type="submit">Sign in</button>
-        </form>
+        <div>
+            <form (ngSubmit)="registerUser()">
+                <h3>You are not register yet, please do!</h3>
+                <div>
+                    <label for="name">Email: </label>
+                    <input id="email" name="email" type="text" [(ngModel)]="email">
+                </div>
+                <div>
+                    <label for="description">Password: </label>
+                    <input id="password" name="password" type="text" [(ngModel)]="password">
+                </div>
+                <button type="submit">Send</button>
+            </form>
+            <button (click)="googleClicked()" class="btn btn-outline-danger mt-5">Login with Google</button>    
+        </div>
+        <div>
+            <form (ngSubmit)="loginClicked()">
+                <h3>You are not logged in yet, please do!</h3>
+                <div>
+                    <label for="name">Email: </label>
+                    <input id="email" name="email" type="text" [(ngModel)]="email">
+                </div>
+                <div>
+                    <label for="description">Password: </label>
+                    <input id="password" name="password" type="text" [(ngModel)]="password">
+                </div>
+                <button type="submit">Sign in</button>
+            </form>
+        </div>
         <button (click)="logOutClicked()" class="btn btn-outline-danger mt-5">Logout</button>
     </div>
 </div>
