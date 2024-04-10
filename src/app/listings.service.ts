@@ -88,7 +88,21 @@ export class ListingsService {
 
 
   deleteListing(id: string): Observable<any>{
-    return this.http.delete(`/api/listings/${id}`);
+    //return this.http.delete(`/api/listings/${id}`);
+    const auth= getAuth();
+    const user= auth.currentUser;
+    return new Observable<any>(observer =>{
+      user.getIdToken().then((token) => {
+        const tokenString = token.toString();
+        // Now "tokenString" is a string containing the actual JWT
+        console.log("Token:", tokenString); 
+        this.http.delete<Listing>(
+          `/api/listings/${id}`, 
+          httOptionsWithAuthToken(tokenString))
+        .subscribe(()=>observer.next()); 
+      });
+    })
+
     }
 
   createListing(name: string, description: string, price: number): Observable<Listing>{
@@ -114,10 +128,25 @@ export class ListingsService {
   }
 
   editListing(id: string, name: string, description: string, price: number): Observable<Listing>{
-    return this.http.post<Listing>(
+    /*return this.http.post<Listing>(
       `/api/listings/${id}`,
       {id, name, description, price},
       httpOptions, 
-    ); 
+    );*/
+    const auth= getAuth();
+    const user= auth.currentUser;
+    return new Observable<Listing>(observer =>{
+      user.getIdToken().then((token) => {
+        const tokenString = token.toString();
+        // Now "tokenString" is a string containing the actual JWT
+        console.log("Token:", tokenString); 
+        this.http.post<Listing>(
+          `/api/listings/${id}`,
+          {name, description, price}, 
+          httOptionsWithAuthToken(tokenString))
+        .subscribe(()=>observer.next()); 
+      });
+    })
+
   }
 }
